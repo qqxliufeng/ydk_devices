@@ -1,0 +1,64 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:keyoardview="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background"
+    tools:context="com.youdaike.checkticket.fragment.VerifyFragment">
+
+
+    <TextView
+        android:id="@+id/fragment_verify_print"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginLeft="@dimen/margin_left"
+        android:layout_marginRight="@dimen/margin_right"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/bg_keyboard_number"
+        android:gravity="center"
+        android:text="打印最后一次消费"
+        android:textColor="#555555"
+        android:textSize="18sp" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_below="@id/fragment_verify_print"
+        android:layout_marginLeft="@dimen/margin_left"
+        android:layout_marginRight="@dimen/margin_right"
+        android:layout_marginTop="15dp">
+
+        <EditText
+            android:id="@+id/fragment_verify_number"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:background="@drawable/bg_input"
+            android:hint="请输入电子凭证/手机号"
+            android:paddingLeft="6dp"
+            android:textColor="#555555"
+            android:textColorHint="#c3c3c3"
+            android:textSize="20sp" />
+
+        <ImageView
+            android:id="@+id/fragment_verify_scan"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:padding="5dp"
+            android:src="@drawable/icon_scan" />
+    </RelativeLayout>
+
+    <com.youdaike.checkticket.view.NumberKeyboardView
+        android:id="@+id/fragment_verify_keyboard"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="@dimen/keyboard_margin"
+        keyoardview:text="验\n证"
+        keyoardview:type="1"></com.youdaike.checkticket.view.NumberKeyboardView>
+
+</RelativeLayout>

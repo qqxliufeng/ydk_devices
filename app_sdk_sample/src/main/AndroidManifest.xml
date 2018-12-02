@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="cn.eas.national.deviceapisample">
+
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.premission.ACCESS_FRONT_CAMERA" />
+    <uses-permission android:name="android.permission.FLASHLIGHT" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+
+    <uses-feature android:name="android.hardware.camera" />
+    <uses-feature android:name="android.hardware.camera.autofocus" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity android:name="cn.eas.national.deviceapisample.MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name="cn.eas.national.deviceapisample.activity.MagCardActivity"
+            android:label="@string/MagCard"
+            android:screenOrientation="nosensor" />
+        <activity
+            android:name="cn.eas.national.deviceapisample.activity.ICCpuCardActivity"
+            android:label="@string/ICCpuCard"
+            android:screenOrientation="nosensor" />
+        <activity
+            android:name="cn.eas.national.deviceapisample.activity.PsamCardActivity"
+            android:label="@string/PsamCard"
+            android:screenOrientation="nosensor" />
+        <activity
+            android:name="cn.eas.national.deviceapisample.activity.SyncCardActivity"
+            android:label="@string/SyncCard"
+            android:screenOrientation="nosensor" />
+        <activity
+            android:name="cn.eas.national.deviceapisample.activity.RFCpuCardActivity"
+            android:label="@string/RfCpuCard"
+            android:screenOrientation="nosensor" ></activity>
+        <activity
+            android:name="cn.eas.national.deviceapisample.activity.MifareCardActivity"
+            android:label="@string/MifareCard"
+            android:screenOrientation="nosensor" />
+        <activity
+            android:name="cn.eas.national.deviceapisample.activity.IDCardActivity"
+            android:label="@string/IDCard"
+            android:screenOrientation="nosensor" />
+        <activity
+            android:name="cn.eas.national.deviceapisample.activity.PrinterActivity"
+            android:label="@string/Printer"
+            android:screenOrientation="nosensor" />
+        <activity
+            android:name="cn.eas.national.deviceapisample.activity.PinpadActivity"
+            android:label="@string/Pinpad"
+            android:screenOrientation="nosensor" />
+        <activity
+            android:name="cn.eas.national.deviceapisample.activity.SerialPortActivity"
+            android:label="@string/SerialPort"
+            android:screenOrientation="nosensor" />
+        <activity
+            android:name="cn.eas.national.deviceapisample.activity.CameraScannerActivity"
+            android:label="@string/CameraScanner"
+            android:screenOrientation="nosensor" />
+        <activity
+            android:name="cn.eas.national.deviceapisample.activity.InnerScannerActivity"
+            android:label="@string/InnerScanner"
+            android:screenOrientation="nosensor" />
+        <activity
+            android:name="cn.eas.national.deviceapisample.activity.ScannerActivity"
+            android:label="@string/Scanner"
+            android:screenOrientation="nosensor" />
+        <activity
+            android:name="cn.eas.national.deviceapisample.activity.LedActivity"
+            android:label="@string/Led"
+            android:screenOrientation="nosensor" />
+        <activity
+            android:name="cn.eas.national.deviceapisample.activity.BeeperActivity"
+            android:label="@string/Beeper"
+            android:screenOrientation="nosensor" />
+        <activity
+            android:name="cn.eas.national.deviceapisample.activity.CashBoxActivity"
+            android:label="@string/CashBox"
+            android:screenOrientation="nosensor" />
+        <activity
+            android:name="cn.eas.national.deviceapisample.activity.SignPanelActivity"
+            android:label="@string/SignPanel"
+            android:screenOrientation="nosensor" />
+        <activity
+            android:name="cn.eas.national.deviceapisample.activity.C10SubscreenDeviceActivity"
+            android:label="@string/C10SubscreenDevice"
+            android:screenOrientation="nosensor" />
+        <activity
+            android:name="cn.eas.national.deviceapisample.activity.C10DigledDeviceActivity"
+            android:label="@string/C10DigledDevice"
+            android:screenOrientation="nosensor" />
+        <activity
+            android:name="cn.eas.national.deviceapisample.activity.AlgorithmActivity"
+            android:label="@string/Algorithm"
+            android:screenOrientation="nosensor" />
+        <activity
+            android:name="cn.eas.national.deviceapisample.activity.SystemDeviceActivity"
+            android:label="@string/System"
+            android:screenOrientation="nosensor" />
+        <activity
+            android:name="cn.eas.national.deviceapisample.activity.ParActivity"
+            android:label="@string/Par"
+            android:screenOrientation="nosensor" />
+
+        <activity
+            android:name="cn.eas.national.deviceapisample.activity.AT1604CardActivity"
+            android:label="@string/AT1604Card"
+            android:screenOrientation="nosensor" />
+        <activity
+            android:name="cn.eas.national.deviceapisample.activity.AT1608CardActivity"
+            android:label="@string/AT1608Card"
+            android:screenOrientation="nosensor" />
+        <activity
+            android:name="cn.eas.national.deviceapisample.activity.AT24CxxCardActivity"
+            android:label="@string/AT24CxxCard"
+            android:screenOrientation="nosensor" />
+        <activity
+            android:name="cn.eas.national.deviceapisample.activity.SIMCardActivity"
+            android:label="@string/SIMCard"
+            android:screenOrientation="nosensor" />
+
+        <activity
+            android:name="cn.eas.national.deviceapisample.activity.SubscreenActivity"
+            android:label="@string/C10SubscreenDevice"
+            android:screenOrientation="nosensor"
+            android:exported="true"
+            android:taskAffinity="com.national.apisample.activity.SubscreenActivity"/>
+
+        <activity android:name="com.landicorp.android.scan.scanDecoder.CaptureActivity"
+            android:label="scan Decoder"
+            android:configChanges="orientation|keyboardHidden" />
+        <activity android:name="com.landicorp.android.scan.scanDecoder.SettingsActivity"/>
+    </application>
+
+</manifest>

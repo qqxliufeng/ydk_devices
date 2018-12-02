@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.ScanActivity">
+
+
+    <!--<com.dlazaro66.qrcodereaderview.QRCodeReaderView-->
+        <!--android:id="@+id/activity_scan_qrcode"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:layout_alignParentTop="true" />-->
+
+    <View
+        android:id="@+id/activity_scan_block"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_centerInParent="true"
+        android:background="@drawable/bg_scan"></View>
+
+    <View
+        android:id="@+id/activity_scan_above"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/activity_scan_block"
+        android:background="#55000000" />
+
+    <View
+        android:id="@+id/activity_scan_below"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/activity_scan_block"
+        android:background="#55000000" />
+
+    <View
+        android:id="@+id/activity_scan_left"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignBottom="@id/activity_scan_block"
+        android:layout_alignTop="@id/activity_scan_block"
+        android:layout_toLeftOf="@id/activity_scan_block"
+        android:background="#55000000" />
+
+    <View
+        android:id="@+id/activity_scan_right"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignBottom="@id/activity_scan_block"
+        android:layout_alignTop="@id/activity_scan_block"
+        android:layout_toRightOf="@id/activity_scan_block"
+        android:background="#55000000" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="40dp"
+        android:text="将二维码放入框内，即可扫描"
+        android:textColor="#00ff00"
+        android:textSize="14sp" />
+</RelativeLayout>

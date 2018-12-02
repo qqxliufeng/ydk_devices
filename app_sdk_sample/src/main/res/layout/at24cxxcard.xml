@@ -1,0 +1,88 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include layout="@layout/module_description"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <Button
+            android:id="@+id/btnCardPower"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Card Power" />
+        <Button
+            android:id="@+id/btnCardHalt"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Cardh Halt" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <Button
+            android:id="@+id/btnRead"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Read" />
+        <Button
+            android:id="@+id/btnWrite"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Write" />
+    </LinearLayout>
+    <cn.eas.national.deviceapisample.view.FlowRadioGroup
+        android:id="@+id/rgCardType"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <RadioButton
+            android:id="@+id/rbAT24C01"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="AT24C01"
+            android:checked="true"/>
+        <RadioButton
+            android:id="@+id/rbAT24C02"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="AT24C02"/>
+        <RadioButton
+            android:id="@+id/rbAT24C04"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="AT24C04" />
+        <RadioButton
+            android:id="@+id/rbAT24C08"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="AT24C08" />
+        <RadioButton
+            android:id="@+id/rbAT24C16"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="AT24C16" />
+        <RadioButton
+            android:id="@+id/rbAT24C32"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="AT24C32" />
+        <RadioButton
+            android:id="@+id/rbAT24C64"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="AT24C64" />
+    </cn.eas.national.deviceapisample.view.FlowRadioGroup>
+
+    <include layout="@layout/message"/>
+
+</LinearLayout>

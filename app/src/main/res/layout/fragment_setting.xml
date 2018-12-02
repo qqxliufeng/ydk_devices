@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#f5f5f5">
+
+    <RelativeLayout
+        android:id="@+id/setting_camera_select"
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="?actionBarSize"
+        android:background="#fff"
+        android:padding="10dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:layout_centerVertical="true"
+            android:textColor="#333"
+            android:text="选择默认摄像头"/>
+
+        <TextView
+            android:id="@+id/setting_camera_id"
+            android:paddingLeft="10dp"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:drawableRight="@drawable/enter"
+            android:drawablePadding="10dp"
+            android:gravity="center"
+            android:text="选择"/>
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:id="@+id/setting_print_count"
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="?actionBarSize"
+        android:background="#fff"
+        android:padding="10dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:layout_centerVertical="true"
+            android:textColor="#333"
+            android:text="打印小票数量"/>
+
+        <TextView
+            android:id="@+id/setting_print_count_num"
+            android:paddingLeft="10dp"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_width="wrap_content"
+            android:drawablePadding="10dp"
+            android:layout_height="match_parent"
+            android:drawableRight="@drawable/enter"
+            android:gravity="center"
+            android:text="1"/>
+    </RelativeLayout>
+
+</LinearLayout>

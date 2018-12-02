@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:keyoardview="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background"
+    tools:context=".activity.LoginActivity">
+
+    <include
+        android:id="@+id/activity_login_title"
+        layout="@layout/view_title_bar" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_below="@id/activity_login_title"
+        android:layout_marginLeft="@dimen/margin_left"
+        android:layout_marginRight="@dimen/margin_right"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/bg_history"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/activity_login_number_1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textColor="#555555"
+            android:textSize="30sp" />
+
+        <View
+            android:layout_width="0.5dp"
+            android:layout_height="match_parent"
+            android:background="#555555" />
+
+        <TextView
+            android:id="@+id/activity_login_number_2"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textColor="#555555"
+            android:textSize="30sp" />
+
+        <View
+            android:layout_width="0.5dp"
+            android:layout_height="match_parent"
+            android:background="#555555" />
+
+        <TextView
+            android:id="@+id/activity_login_number_3"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textColor="#555555"
+            android:textSize="30sp" />
+
+        <View
+            android:layout_width="0.5dp"
+            android:layout_height="match_parent"
+            android:background="#555555" />
+
+        <TextView
+            android:id="@+id/activity_login_number_4"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textColor="#555555"
+            android:textSize="30sp" />
+
+        <View
+            android:layout_width="0.5dp"
+            android:layout_height="match_parent"
+            android:background="#555555" />
+
+        <TextView
+            android:id="@+id/activity_login_number_5"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textColor="#555555"
+            android:textSize="30sp" />
+
+        <View
+            android:layout_width="0.5dp"
+            android:layout_height="match_parent"
+            android:background="#555555" />
+
+        <TextView
+            android:id="@+id/activity_login_number_6"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textColor="#555555"
+            android:textSize="30sp" />
+
+    </LinearLayout>
+
+    <com.youdaike.checkticket.view.NumberKeyboardView
+        android:id="@+id/activity_login_keyboard"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="@dimen/keyboard_margin"
+        keyoardview:text="登\n录"
+        keyoardview:type="1"></com.youdaike.checkticket.view.NumberKeyboardView>
+</RelativeLayout>
