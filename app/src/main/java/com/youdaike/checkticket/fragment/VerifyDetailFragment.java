@@ -59,6 +59,8 @@ public class VerifyDetailFragment extends BaseFragment {
     TextView mTV_Title;
     @BindView(R.id.fragment_verify_detail_number)
     TextView mTV_Number;
+    @BindView(R.id.fragment_verify_detail_phone)
+    TextView tv_phone;
     @BindView(R.id.fragment_verify_detail_remaincount)
     TextView mTV_RemainCount;
     @BindView(R.id.fragment_verify_detail_mincount_lay)
@@ -105,6 +107,12 @@ public class VerifyDetailFragment extends BaseFragment {
         if (mVerifyModel != null) {
             mTV_Title.setText(mVerifyModel.getTitle());
             mTV_Number.setText(mCouponNo);
+            if (TextUtils.isEmpty(mVerifyModel.getPhone())){
+                tv_phone.setVisibility(View.GONE);
+            }else {
+                tv_phone.setVisibility(View.VISIBLE);
+                tv_phone.setText("手机号："+mVerifyModel.getPhone());
+            }
             mTV_RemainCount.setText(mVerifyModel.getSurplusnm());
             if (!TextUtils.isEmpty(mVerifyModel.getMinnum()) && Integer.valueOf(mVerifyModel.getMinnum()) > 0) {
                 mLL_MinCount.setVisibility(View.VISIBLE);

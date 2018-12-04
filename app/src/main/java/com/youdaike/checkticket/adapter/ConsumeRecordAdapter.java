@@ -75,6 +75,7 @@ public class ConsumeRecordAdapter extends RecyclerView.Adapter<ConsumeRecordAdap
         holder.tv_consume_count.setText(mList.get(position).getCouponnum());
         holder.tv_status.setText("已消费");
         holder.tv_customer.setText(mList.get(position).getOrderlink());
+        holder.tv_num.setText(mList.get(position).getCouponno());
         holder.tv_phone.setText(mList.get(position).getOrdermoblie());
         holder.tv_buy_time.setText(mList.get(position).getOrdertime());
         holder.tv_consume_time.setText(mList.get(position).getCreatetime());
@@ -106,6 +107,7 @@ public class ConsumeRecordAdapter extends RecyclerView.Adapter<ConsumeRecordAdap
         TextView tv_consume_count;
         TextView tv_status;
         TextView tv_customer;
+        TextView tv_num;
         TextView tv_phone;
         TextView tv_buy_time;
         TextView tv_consume_time;
@@ -119,6 +121,7 @@ public class ConsumeRecordAdapter extends RecyclerView.Adapter<ConsumeRecordAdap
             tv_consume_count = (TextView) view.findViewById(R.id.item_consume_record_consume_count);
             tv_status = (TextView) view.findViewById(R.id.item_consume_record_status);
             tv_customer = (TextView) view.findViewById(R.id.item_consume_record_customer);
+            tv_num = (TextView) view.findViewById(R.id.item_consume_record_num);
             tv_phone = (TextView) view.findViewById(R.id.item_consume_record_phone);
             tv_buy_time = (TextView) view.findViewById(R.id.item_consume_record_buy_time);
             tv_consume_time = (TextView) view.findViewById(R.id.item_consume_record_consume_time);

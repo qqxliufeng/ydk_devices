@@ -8,6 +8,7 @@ import java.io.Serializable;
 public class TicketVerifyModel implements Serializable {
     private String id;
     private String title;
+    private String phone;
     private String surplusnm;//剩余数量
     private String minnum;//最小消费数量 0为不限制
 
@@ -41,5 +42,13 @@ public class TicketVerifyModel implements Serializable {
 
     public void setSurplusnm(String surplusnm) {
         this.surplusnm = surplusnm;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 }

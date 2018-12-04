@@ -466,7 +466,7 @@ public class VerifyFragment extends BaseFragment {
                         if ("200".equals(model.getStatus())) {//成功
                             Log.i(TAG, "onResponse: 成功");
                             Bundle bundle = new Bundle();
-                            bundle.putString(VerifyFragment.COUPONNO, mNumber.toString());
+                            bundle.putString(VerifyFragment.COUPONNO, model.getData().getId());
                             bundle.putSerializable(VerifyFragment.TICKETVERIFYMODEL, model.getData());
                             ((MainActivity) getActivity()).setFragment(4, bundle);
                         } else {//失败
