@@ -66,9 +66,6 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.Map;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -316,6 +313,8 @@ public class MainActivity extends SerialPortActivity {
         EventBus.getDefault().unregister(this);
     }
 
+
+
     @OnClick({R.id.view_title_bar_title_back})
     public void onClick(View view) {
         switch (view.getId()) {
@@ -445,21 +444,21 @@ public class MainActivity extends SerialPortActivity {
         tempType = type;
         printCount = PreferencesUtil.getInt(this, Constants.PreferencesTag.PRINT_NUM, 1);
         printer.init();
-        startPrint(json, type);
+        startPrint(json, type,TITLES[0]);
     }
 
-    private void startPrint(String json, int type) {
+    private void startPrint(String json, int type,String title) {
         printer.init();
         switch (type) {
             case 1://验证时打印【商家凭证】
-                if (!printer.addTextType1(json)) {
+                if (!printer.addTextType1(json,title)) {
                     Toast.makeText(context, "打印失败", Toast.LENGTH_SHORT).show();
                     return;
                 }
                 addEndPrint();
                 break;
             case 2://打印最后一次消费【重复打印】
-                if (!printer.addTextType2(json)) {
+                if (!printer.addTextType2(json,title)) {
                     Toast.makeText(context, "打印失败", Toast.LENGTH_SHORT).show();
                     return;
                 }
@@ -475,7 +474,7 @@ public class MainActivity extends SerialPortActivity {
                 addEndPrint();
                 break;
             case 5://凭证查询打印【凭证查询】
-                if (!printer.addTextType5(json)) {
+                if (!printer.addTextType5(json,title)) {
                     Toast.makeText(context, "打印失败", Toast.LENGTH_SHORT).show();
                     return;
                 }
@@ -1315,6 +1314,8 @@ public class MainActivity extends SerialPortActivity {
 
     private Handler printHandler = new Handler();
 
+    private static String[] TITLES = {"商家凭证","客户凭证","入账凭证"};
+
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onMessageEvent(PrintEventCunt eventCunt) {
         if (eventCunt.getFlag() == Printer.ERROR_NONE && tempJson != null && tempType != -1) {
@@ -1325,7 +1326,7 @@ public class MainActivity extends SerialPortActivity {
                 public void run() {
                     if (mContainer != null) {
                         if (printCount >= 1) {
-                            startPrint(tempJson, tempType);
+                            startPrint(tempJson, tempType, TITLES[Math.abs(printCount - PreferencesUtil.getInt(MainActivity.this, Constants.PreferencesTag.PRINT_NUM, 1))]);
                         }
                     }
                 }

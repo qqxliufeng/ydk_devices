@@ -3,6 +3,7 @@ package com.youdaike.checkticket.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.LinearLayout;
@@ -11,6 +12,7 @@ import android.widget.Toast;
 
 import com.youdaike.checkticket.R;
 import com.youdaike.checkticket.contract.UrlContract;
+import com.youdaike.checkticket.model.BackEvent;
 import com.youdaike.checkticket.model.BaseResponseModel;
 import com.youdaike.checkticket.model.VersionModel;
 import com.youdaike.checkticket.utils.ResponseUtil;
@@ -18,6 +20,10 @@ import com.youdaike.checkticket.utils.VersionUtil;
 import com.youdaike.checkticket.view.CustomDialog;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.Callback;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -50,34 +56,13 @@ public class HomeActivity extends BaseActivity {
         mTV_Title.setText("优待客电子票核销平台");
         mTV_Name.setText("");
         mVersionUtil = new VersionUtil(this);
+        EventBus.getDefault().register(this);
         checkVersion();
     }
 
-    @OnClick({R.id.view_title_bar_title_back, R.id.home_verify, R.id.home_query, R.id.home_report,R.id.home_setting})
+    @OnClick({R.id.home_verify, R.id.home_query, R.id.home_report,R.id.home_setting})
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.view_title_bar_title_back:
-//                AlertDialog.Builder builder = new AlertDialog.Builder(this);
-//                builder.setMessage("是否要霸屏");
-//                builder.setPositiveButton("是", new DialogInterface.OnClickListener() {
-//                    @Override
-//                    public void onClick(DialogInterface dialog, int which) {
-//                        Intent intent = new Intent(HomeActivity.this, LoginActivity.class);
-//                        intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
-//                        intent.addCategory(Intent.CATEGORY_HOME);
-//                        intent.addCategory(Intent.CATEGORY_DEFAULT);
-//                        startActivity(intent);
-//                        finish();
-//                    }
-//                });
-//                builder.setNegativeButton("否", new DialogInterface.OnClickListener() {
-//                    @Override
-//                    public void onClick(DialogInterface dialog, int which) {
-//                    }
-//                });
-//                builder.create().show();
-                finish();
-                break;
             case R.id.home_verify:
                 enterMain(0);
                 break;
@@ -91,6 +76,18 @@ public class HomeActivity extends BaseActivity {
                 enterMain(6);
         }
     }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onBackEvent(BackEvent backEvent){
+        finish();
+    }
+
 
     private void enterMain(int from) {
         Intent intent = new Intent(this, MainActivity.class);
@@ -142,4 +139,22 @@ public class HomeActivity extends BaseActivity {
                 });
     }
 
+
+    @Override
+    public void onAttachedToWindow() {
+        this.getWindow().setType(WindowManager.LayoutParams.TYPE_KEYGUARD_DIALOG);
+        super.onAttachedToWindow();
+    }
+
+    @Override
+    public void onBackPressed() {
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode != KeyEvent.KEYCODE_BACK){
+            return super.onKeyDown(keyCode, event);
+        }
+        return true;
+    }
 }

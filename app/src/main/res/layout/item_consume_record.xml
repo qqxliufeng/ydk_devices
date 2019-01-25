@@ -5,7 +5,7 @@
     android:id="@+id/item_consume_record_layout"
     android:background="@drawable/bg_keyboard_number">
 
-    <CheckBox
+    <CheckedTextView
         android:id="@+id/item_consume_record_check"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -13,8 +13,7 @@
         android:layout_alignParentTop="true"
         android:layout_marginRight="10dp"
         android:layout_marginTop="35dp"
-        android:background="@null"
-        android:button="@drawable/selector_cb_query"
+        android:background="@drawable/selector_cb_query"
         android:checked="false"
         android:padding="5dp" />
 

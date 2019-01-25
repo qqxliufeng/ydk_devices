@@ -1,6 +1,7 @@
 package com.youdaike.checkticket.activity;
 
 import android.app.Activity;
+import android.app.KeyguardManager;
 import android.content.Context;
 import android.content.res.Resources;
 import android.os.Bundle;
@@ -19,6 +20,12 @@ public class BaseActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        KeyguardManager keyguardManager = (KeyguardManager)getSystemService(Activity.KEYGUARD_SERVICE);
+        KeyguardManager.KeyguardLock lock;
+        if (keyguardManager != null) {
+            lock = keyguardManager.newKeyguardLock(KEYGUARD_SERVICE);
+            lock.disableKeyguard();//关闭系统锁屏
+        }
     }
 
     @Override

@@ -60,7 +60,7 @@ public abstract class PrinterImpl extends BaseDevice {
      *
      * @return
      */
-    public boolean addTextType2(String json) {
+    public boolean addTextType2(String json, final String title) {
         checkList();
         try {
             final JSONObject object = new JSONObject(json);
@@ -75,6 +75,7 @@ public abstract class PrinterImpl extends BaseDevice {
 
                     getTitleFormat(printer, format);
                     printer.printMid("优待客票务【重复打印】\n");
+                    printer.printMid(title +"\n");
                     printer.printMid("(请核实此订单是否重复使用)\n");
                     printer.printMid(PrintConstants.SEPARATOR_LINE + "\n");
 
@@ -90,6 +91,8 @@ public abstract class PrinterImpl extends BaseDevice {
                     printer.printText(alignment, "温馨提示:\n");
                     printer.printText(alignment, "1.请核实凭证号是否重复使用\n");
                     printer.printText(alignment, "2.此凭证相关人员签字后有效\n");
+                    printer.printText(alignment, "3.此凭证不可作为报销凭证，\n");
+                    printer.printText(alignment, "如需报销凭证请联系商家\n");
                     printer.printText(alignment, "客服电话:0531-85333222\n");
                     printer.printText(alignment, "景区工作人员签字：\n");
                     printer.printText(alignment, "客户签字：\n");
@@ -143,7 +146,6 @@ public abstract class PrinterImpl extends BaseDevice {
 
                     getTitleFormat(printer, format);
                     printer.printMid("优待客票务【统计报表】\n");
-
                     Printer.Alignment alignment = getContentAlignment(printer, format);
                     JSONArray data = object.optJSONArray("data");
                     if (data != null && data.length() > 0) {
@@ -184,7 +186,7 @@ public abstract class PrinterImpl extends BaseDevice {
      *
      * @return
      */
-    public boolean addTextType1(String json) {
+    public boolean addTextType1(String json,final String title) {
         checkList();
         try {
             final JSONObject object = new JSONObject(json);
@@ -198,9 +200,8 @@ public abstract class PrinterImpl extends BaseDevice {
                     Format format = new Format();
 
                     getTitleFormat(printer, format);
-                    printer.printMid("优待客票务【商家凭证】\n");
+                    printer.printMid("优待客票务【"+title+"】\n");
                     printer.printMid(PrintConstants.SEPARATOR_LINE + "\n");
-
                     Printer.Alignment alignment = getContentAlignment(printer, format);
 
                     JSONObject data = object.optJSONObject("data");
@@ -220,6 +221,8 @@ public abstract class PrinterImpl extends BaseDevice {
                     printer.printText(alignment, "温馨提示:" + "\n");
                     printer.printText(alignment, "1.一经打印，不可退改" + "\n");
                     printer.printText(alignment, "2.验证当天有效，过期作废" + "\n");
+                    printer.printText(alignment, "3.此凭证不可作为报销凭证，\n");
+                    printer.printText(alignment, "如需报销凭证请联系商家\n");
                     printer.printText(alignment, "客服电话:0531-85333222" + "\n");
                     addEndSpaceLine(printer, alignment);
                 }
@@ -235,7 +238,7 @@ public abstract class PrinterImpl extends BaseDevice {
      *
      * @return
      */
-    public boolean addTextType5(String json) {
+    public boolean addTextType5(String json,final String title) {
         checkList();
         try {
             final JSONArray dataArray = new JSONArray(json);
@@ -250,6 +253,7 @@ public abstract class PrinterImpl extends BaseDevice {
 
                     getTitleFormat(printer, format);
                     printer.printMid("优待客票务【凭证查询】\n");
+                    printer.printMid(title+"\n");
                     printer.printMid("(此凭证不能作为入园凭证使用)\n");
                     printer.printMid(PrintConstants.SEPARATOR_LINE + "\n");
 
@@ -315,6 +319,8 @@ public abstract class PrinterImpl extends BaseDevice {
                     printer.printText(alignment, "温馨提示:\n");
                     printer.printText(alignment, "1.查询结果不能作为入园凭证\n");
                     printer.printText(alignment, "2.特殊情况，请认真核实\n");
+                    printer.printText(alignment, "3.此凭证不可作为报销凭证，\n");
+                    printer.printText(alignment, "如需报销凭证请联系商家\n");
                     printer.printText(alignment, "客服电话:0531-85333222\n");
                     printer.printText(alignment, "客户签字:\n");
                     printer.printText(alignment, "客户电话:\n");

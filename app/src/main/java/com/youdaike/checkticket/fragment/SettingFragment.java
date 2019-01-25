@@ -1,11 +1,10 @@
 package com.youdaike.checkticket.fragment;
 
-import android.app.AlertDialog;
 import android.content.DialogInterface;
-import android.content.res.Resources;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.util.Log;
+import android.support.v7.app.AlertDialog;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,7 +12,9 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.youdaike.checkticket.R;
+import com.youdaike.checkticket.activity.LoginActivity;
 import com.youdaike.checkticket.activity.MainActivity;
+import com.youdaike.checkticket.contract.StringContract;
 import com.youdaike.checkticket.model.BackEvent;
 import com.youdaike.checkticket.utils.Constants;
 import com.youdaike.checkticket.utils.PreferencesUtil;
@@ -34,7 +35,9 @@ public class SettingFragment extends BaseFragment{
     TextView mTvPrintCountNum;
 
     private final String[] items = {"前置摄像头", "后置摄像头", "暂不选择"};
-    private final String[] numItems = {"1", "2", "3","4","5","6"};
+    private final String[] numItems = {"1", "2", "3"};
+
+    public static final int MAX_PRINT_COUNT = 3;
 
 
     @Nullable
@@ -76,7 +79,7 @@ public class SettingFragment extends BaseFragment{
         EventBus.getDefault().unregister(this);
     }
 
-    @OnClick({R.id.setting_camera_select,R.id.setting_print_count})
+    @OnClick({R.id.setting_camera_select,R.id.setting_print_count,R.id.mBtSettingLogout})
     public void onClick(View view){
         switch (view.getId()){
             case R.id.setting_camera_select:
@@ -110,6 +113,22 @@ public class SettingFragment extends BaseFragment{
                     }
                 });
                 numBuilder.create().show();
+                break;
+            case R.id.mBtSettingLogout:
+                AlertDialog.Builder logoutBuilder = new AlertDialog.Builder(getActivity());
+                logoutBuilder.setTitle("提示");
+                logoutBuilder.setMessage("是否要退出登录并清空所有缓存信息？");
+                logoutBuilder.setNegativeButton("取消",null);
+                logoutBuilder.setPositiveButton("退出登录", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        PreferencesUtil.putString(getActivity(), StringContract.PASSWORD, "");
+                        getActivity().startActivity(new Intent(getActivity(),LoginActivity.class));
+                        EventBus.getDefault().post(new BackEvent(0));
+                        getActivity().finish();
+                    }
+                });
+                logoutBuilder.create().show();
                 break;
         }
     }

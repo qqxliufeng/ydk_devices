@@ -4,10 +4,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.support.annotation.Nullable;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -15,6 +17,7 @@ import com.youdaike.checkticket.R;
 import com.youdaike.checkticket.contract.StringContract;
 import com.youdaike.checkticket.contract.UrlContract;
 import com.youdaike.checkticket.model.BaseResponseModel;
+import com.youdaike.checkticket.model.ScenicNameModel;
 import com.youdaike.checkticket.utils.PreferencesUtil;
 import com.youdaike.checkticket.utils.ResponseUtil;
 import com.youdaike.checkticket.view.CustomDialog;
@@ -24,7 +27,6 @@ import com.zhy.http.okhttp.callback.Callback;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 import okhttp3.Call;
 import okhttp3.Response;
 
@@ -49,8 +51,12 @@ public class LoginActivity extends BaseActivity {
     TextView mTV_Number_5;
     @BindView(R.id.activity_login_number_6)
     TextView mTV_Number_6;
+    @BindView(R.id.mTvLoginScenicName)
+    TextView mTvScenicName;
     @BindView(R.id.activity_login_keyboard)
     NumberKeyboardView mNKV_Keyboard;
+
+    private boolean isLoadScenicName = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,27 +67,75 @@ public class LoginActivity extends BaseActivity {
         initKeyboardListener();
         mTV_Title.setText("验证密码");
         mTV_Name.setText("");
+        mTvScenicName.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getScenicName();
+            }
+        });
     }
+
+//    @Override
+//    protected void onResume() {
+//        super.onResume();
+//        String password = PreferencesUtil.getString(this, StringContract.PASSWORD);
+//        Log.i(TAG, "onResume: password=" + password);
+//        if (!TextUtils.isEmpty(password) && password.length() == 6) {
+//            for (int i = 0; i < password.length(); i++) {
+//                inputPWD(password.substring(i, i + 1));
+//            }
+//        }
+//    }
 
     @Override
-    protected void onResume() {
-        super.onResume();
-        String password = PreferencesUtil.getString(this, StringContract.PASSWORD);
-        Log.i(TAG, "onResume: password=" + password);
-        if (!TextUtils.isEmpty(password) && password.length() == 6) {
-            for (int i = 0; i < password.length(); i++) {
-                inputPWD(password.substring(i, i + 1));
-            }
-        }
+    protected void onPostCreate(@Nullable Bundle savedInstanceState) {
+        super.onPostCreate(savedInstanceState);
+        getScenicName();
     }
 
-    @OnClick({R.id.view_title_bar_title_back})
-    public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.view_title_bar_title_back:
-                finish();
-                break;
-        }
+    private void getScenicName() {
+        Log.i(TAG, "getScenicName: =" + UrlContract.GET_SCENIC_NAME + "?devicesid=" + getIMEI());
+        mTvScenicName.setText("正在获取商家名称……");
+        OkHttpUtils
+                .post()
+                .url(UrlContract.GET_SCENIC_NAME)
+                .addParams("devicesid", getIMEI())
+                .build()
+                .execute(new Callback() {
+                    @Override
+                    public Object parseNetworkResponse(Response response, int id) throws Exception {
+                        return response.body().string();
+                    }
+
+                    @Override
+                    public void onError(Call call, Exception e, int id) {
+                        mTvScenicName.setText("商家名称获取失败，点击重试");
+                        mTvScenicName.setEnabled(true);
+                        isLoadScenicName = false;
+                        Toast.makeText(LoginActivity.this, "网络异常，请稍后重试", Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onResponse(Object response, int id) {
+                        BaseResponseModel<ScenicNameModel> model = ResponseUtil.getObjectResponse(String.valueOf(response), ScenicNameModel.class);
+                        if ("200".equals(model.getStatus())) {//成功
+                            mTvScenicName.setEnabled(false);
+                            isLoadScenicName = true;
+                            mTvScenicName.setText(model.getData().getTitle());
+                            String password = PreferencesUtil.getString(LoginActivity.this, StringContract.PASSWORD);
+                            if (!TextUtils.isEmpty(password) && password.length() == 6) {
+                                for (int i = 0; i < password.length(); i++) {
+                                    inputPWD(password.substring(i, i + 1));
+                                }
+                            }
+                        } else {//失败
+                            isLoadScenicName = false;
+                            Toast.makeText(LoginActivity.this, model.getMessage(), Toast.LENGTH_SHORT).show();
+                            mTvScenicName.setText("商家名称获取失败，点击重试");
+                            mTvScenicName.setEnabled(true);
+                        }
+                    }
+                });
     }
 
     Handler mHandler = new Handler() {
@@ -295,46 +349,50 @@ public class LoginActivity extends BaseActivity {
     }
 
     private void virifyPwd() {
-        Log.i(TAG, "virifyPwd: =" + UrlContract.LOGIN_VERIFY + "?devicesid=" + getIMEI() + "&password=" + mPassword.toString());
-        mCustomDialog = CustomDialog.show(this, "验证中···");
-        OkHttpUtils
-                .post()
-                .url(UrlContract.LOGIN_VERIFY)
-                .addParams("devicesid", getIMEI())
-                .addParams("password", mPassword.toString())
-                .build()
-                .execute(new Callback() {
-                    @Override
-                    public Object parseNetworkResponse(Response response, int id) throws Exception {
-                        return response.body().string();
-                    }
+        if (isLoadScenicName) {
+            mCustomDialog = CustomDialog.show(this, "验证中···");
+            OkHttpUtils
+                    .post()
+                    .url(UrlContract.LOGIN_VERIFY)
+                    .addParams("devicesid", getIMEI())
+                    .addParams("password", mPassword.toString())
+                    .build()
+                    .execute(new Callback() {
+                        @Override
+                        public Object parseNetworkResponse(Response response, int id) throws Exception {
+                            return response.body().string();
+                        }
 
-                    @Override
-                    public void onError(Call call, Exception e, int id) {
-                        Log.i(TAG, "onError: " + e);
-                        if (mCustomDialog != null && mCustomDialog.isShowing()) {
-                            mCustomDialog.dismiss();
+                        @Override
+                        public void onError(Call call, Exception e, int id) {
+                            Log.i(TAG, "onError: " + e);
+                            if (mCustomDialog != null && mCustomDialog.isShowing()) {
+                                mCustomDialog.dismiss();
+                            }
+                            Toast.makeText(LoginActivity.this, "网络异常，请稍后重试", Toast.LENGTH_SHORT).show();
                         }
-                        Toast.makeText(LoginActivity.this, "网络异常，请稍后重试", Toast.LENGTH_SHORT).show();
-                    }
 
-                    @Override
-                    public void onResponse(Object response, int id) {
-                        Log.i(TAG, "onResponse: response=" + response);
-                        if (mCustomDialog != null && mCustomDialog.isShowing()) {
-                            mCustomDialog.dismiss();
+                        @Override
+                        public void onResponse(Object response, int id) {
+                            Log.i(TAG, "onResponse: response=" + response);
+                            if (mCustomDialog != null && mCustomDialog.isShowing()) {
+                                mCustomDialog.dismiss();
+                            }
+                            BaseResponseModel<String> model = ResponseUtil.getStringResponse(String.valueOf(response));
+                            if ("200".equals(model.getStatus())) {//成功
+                                Log.i(TAG, "onResponse: 成功");
+                                PreferencesUtil.putString(LoginActivity.this, StringContract.PASSWORD, mPassword.toString());
+                                enterHome();
+                            } else {//失败
+                                Log.i(TAG, "onResponse: 失败---" + model.getStatus() + "," + model.getMessage());
+                                Toast.makeText(LoginActivity.this, model.getMessage(), Toast.LENGTH_SHORT).show();
+                            }
                         }
-                        BaseResponseModel<String> model = ResponseUtil.getStringResponse(String.valueOf(response));
-                        if ("200".equals(model.getStatus())) {//成功
-                            Log.i(TAG, "onResponse: 成功");
-                            PreferencesUtil.putString(LoginActivity.this, StringContract.PASSWORD, mPassword.toString());
-                            enterHome();
-                        } else {//失败
-                            Log.i(TAG, "onResponse: 失败---" + model.getStatus() + "," + model.getMessage());
-                            Toast.makeText(LoginActivity.this, model.getMessage(), Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                });
+                    });
+        }else {
+            Toast.makeText(LoginActivity.this, "正在获取商家名称……", Toast.LENGTH_LONG).show();
+            getScenicName();
+        }
     }
 
     private void enterHome() {
@@ -342,5 +400,23 @@ public class LoginActivity extends BaseActivity {
         Intent intent = new Intent(this, HomeActivity.class);
         startActivity(intent);
         finish();
+    }
+
+    @Override
+    public void onAttachedToWindow() {
+        this.getWindow().setType(WindowManager.LayoutParams.TYPE_KEYGUARD_DIALOG);
+        super.onAttachedToWindow();
+    }
+
+    @Override
+    public void onBackPressed() {
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode != KeyEvent.KEYCODE_BACK){
+            return super.onKeyDown(keyCode, event);
+        }
+        return true;
     }
 }

@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
+import android.widget.CheckedTextView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -102,7 +103,7 @@ public class ConsumeRecordAdapter extends RecyclerView.Adapter<ConsumeRecordAdap
 
     class MyViewHolder extends RecyclerView.ViewHolder {
         RelativeLayout rl_layout;
-        CheckBox cb_check;
+        CheckedTextView cb_check;
         TextView tv_ticket_name;
         TextView tv_consume_count;
         TextView tv_status;
@@ -116,7 +117,7 @@ public class ConsumeRecordAdapter extends RecyclerView.Adapter<ConsumeRecordAdap
         public MyViewHolder(View view) {
             super(view);
             rl_layout = (RelativeLayout) view.findViewById(R.id.item_consume_record_layout);
-            cb_check = (CheckBox) view.findViewById(R.id.item_consume_record_check);
+            cb_check = (CheckedTextView) view.findViewById(R.id.item_consume_record_check);
             tv_ticket_name = (TextView) view.findViewById(R.id.item_consume_record_ticket_name);
             tv_consume_count = (TextView) view.findViewById(R.id.item_consume_record_consume_count);
             tv_status = (TextView) view.findViewById(R.id.item_consume_record_status);

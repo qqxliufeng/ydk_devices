@@ -7,8 +7,8 @@ android {
         applicationId "com.youdaike.checktickettest"
         minSdkVersion 17
         targetSdkVersion 22
-        versionCode 3
-        versionName "1.2"
+        versionCode 4
+        versionName "1.4"
         multiDexEnabled true
     }
 
@@ -39,18 +39,17 @@ android {
     }
 }
 dependencies {
-    compile fileTree(include: ['*.jar'], dir: 'libs')
-    testCompile 'junit:junit:4.12'
-    compile 'com.android.support:appcompat-v7:24.2.0'
-    compile 'com.jakewharton:butterknife:8.4.0'
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation 'com.android.support:appcompat-v7:24.2.0'
+    implementation 'com.jakewharton:butterknife:8.4.0'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.4.0'
-    compile 'com.zhy:okhttputils:2.6.2'
-    compile 'com.google.code.gson:gson:2.3.1'
-    compile 'com.android.support:recyclerview-v7:24.2.1'
-    compile files('libs/hdxutil.jar')
-    compile files('libs/commons-beanutils-1.7.0.jar')
-    compile files('libs/commons-collections-3.1.jar')
-    compile 'org.greenrobot:eventbus:3.0.0'
+    implementation 'com.zhy:okhttputils:2.6.2'
+    implementation 'com.google.code.gson:gson:2.3.1'
+    implementation 'com.android.support:recyclerview-v7:24.2.1'
+    implementation files('libs/hdxutil.jar')
+    implementation files('libs/commons-beanutils-1.7.0.jar')
+    implementation files('libs/commons-collections-3.1.jar')
+    implementation 'org.greenrobot:eventbus:3.0.0'
     implementation files('libs/ScanDecoder_v1.1.8.0803.jar')
     implementation files('libs/pinpad.jar')
     implementation files('libs/eptapilibrary.jar')

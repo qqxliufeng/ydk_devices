@@ -1,64 +1,84 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#f5f5f5">
+    android:background="#f5f5f5"
+    android:orientation="vertical">
 
-    <RelativeLayout
-        android:id="@+id/setting_camera_select"
-        android:layout_marginTop="10dp"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="?actionBarSize"
-        android:background="#fff"
-        android:padding="10dp">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="18sp"
-            android:layout_centerVertical="true"
-            android:textColor="#333"
-            android:text="选择默认摄像头"/>
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/setting_camera_id"
-            android:paddingLeft="10dp"
-            android:layout_centerVertical="true"
-            android:layout_alignParentRight="true"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:drawableRight="@drawable/enter"
-            android:drawablePadding="10dp"
-            android:gravity="center"
-            android:text="选择"/>
-    </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/setting_camera_select"
+            android:layout_width="match_parent"
+            android:layout_height="?actionBarSize"
+            android:layout_marginTop="10dp"
+            android:background="#fff"
+            android:padding="10dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:text="选择默认摄像头"
+                android:textColor="#333"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/setting_camera_id"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:drawableRight="@drawable/enter"
+                android:drawablePadding="10dp"
+                android:gravity="center"
+                android:paddingLeft="10dp"
+                android:text="选择" />
+        </RelativeLayout>
 
 
-    <RelativeLayout
-        android:id="@+id/setting_print_count"
-        android:layout_marginTop="10dp"
+        <RelativeLayout
+            android:id="@+id/setting_print_count"
+            android:layout_width="match_parent"
+            android:layout_height="?actionBarSize"
+            android:layout_marginTop="10dp"
+            android:background="#fff"
+            android:padding="10dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:text="打印小票数量"
+                android:textColor="#333"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/setting_print_count_num"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:drawableRight="@drawable/enter"
+                android:drawablePadding="10dp"
+                android:gravity="center"
+                android:paddingLeft="10dp"
+                android:text="1" />
+        </RelativeLayout>
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/mBtSettingLogout"
+        android:layout_marginBottom="10dp"
+        android:text="退出登录"
         android:layout_width="match_parent"
-        android:layout_height="?actionBarSize"
-        android:background="#fff"
-        android:padding="10dp">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="18sp"
-            android:layout_centerVertical="true"
-            android:textColor="#333"
-            android:text="打印小票数量"/>
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:textColor="#fff"
+        android:textSize="18dp"
+        android:background="#88ff0000"/>
 
-        <TextView
-            android:id="@+id/setting_print_count_num"
-            android:paddingLeft="10dp"
-            android:layout_centerVertical="true"
-            android:layout_alignParentRight="true"
-            android:layout_width="wrap_content"
-            android:drawablePadding="10dp"
-            android:layout_height="match_parent"
-            android:drawableRight="@drawable/enter"
-            android:gravity="center"
-            android:text="1"/>
-    </RelativeLayout>
-
-</LinearLayout>
+</RelativeLayout>
